@@ -5,20 +5,20 @@ var projects = require('../projects.json');
  */
 
 exports.view = function(req, res){
-	projects["grid"] = false;
-  	res.render('index', projects);
+	var random_num = Math.random();
+	console.log(random_num);
+
+	if (random_num >= 0) {
+	  projects['grid'] = false;
+	  res.render('index', projects);
+	} else {
+	  res.redirect('/grid');
+	}
 };
 
 exports.viewGrid = function(req, res){
+	console.log("in here");
 	projects["grid"] = true;
 	res.render('index', projects);
 }
 
-function projectClick(e) { 
-    // prevent the page from reloading      
-    e.preventDefault();
-    // In an event handler, $(this) refers to      
-    // the object that triggered the event     
-    ga("send", "event", 'like', 'click'); 
-    $(this).css("background-color", "#7fff00");
-}
